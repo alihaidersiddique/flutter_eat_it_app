@@ -1,7 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_eat_it_app/model/restaurant_model.dart';
 import 'package:flutter_eat_it_app/strings/main_strings.dart';
+import 'package:flutter_eat_it_app/view_model/main_view_model_imp.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Future<void> main() async {
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   final FirebaseApp app;
+  final mainView = MainViewModelImp();
 
   MyHomePage({required this.app});
 
@@ -49,17 +51,21 @@ class MyHomePage extends StatelessWidget {
         elevation: 10,
       ),
       body: FutureBuilder(
-        future:
-            FirebaseDatabase(app: app).reference().child('Restaurant').once(),
+        future: mainView.displayRestaurantList(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting)
             return Center(
               child: CircularProgressIndicator(),
             );
-          else
-            return Center(
-              child: Text('Load ok'),
+          else {
+            var lst = snapshot.data as List<RestaurantModel>;
+            return ListView.builder(
+              itemCount: lst.length,
+              itemBuilder: (context, index) {
+                return Text(lst[index].name);
+              },
             );
+          }
         },
       ),
     );
