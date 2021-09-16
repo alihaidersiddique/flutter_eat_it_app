@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1062965028919",
+    "project_id": "flutter-eat-it-app",
+    "storage_bucket": "flutter-eat-it-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062965028919:android:4b76df0d3d8b944fc477b2",
+        "android_client_info": {
+          "package_name": "com.example.flutter_eat_it_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1062965028919-4kacfcc64bg283kh2u39rkpt4f0932dt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAS7WLpsjxvNQxju9zQYVbWLsOZucK2F9s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1062965028919-4kacfcc64bg283kh2u39rkpt4f0932dt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
