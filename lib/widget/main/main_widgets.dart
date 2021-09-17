@@ -13,6 +13,7 @@ class RestaurantImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      width: double.infinity,
       height: 250,
       child: Card(
         semanticContainer: true,

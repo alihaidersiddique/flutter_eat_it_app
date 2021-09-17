@@ -2,11 +2,14 @@ import 'package:auto_animated/auto_animated.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eat_it_app/model/restaurant_model.dart';
+import 'package:flutter_eat_it_app/screens/restaurant_home.dart';
+import 'package:flutter_eat_it_app/state/main_state.dart';
 import 'package:flutter_eat_it_app/strings/main_strings.dart';
-import 'package:flutter_eat_it_app/view_model/main_view_model_imp.dart';
+import 'package:flutter_eat_it_app/view_model/main_vm/main_view_model_imp.dart';
 import 'package:flutter_eat_it_app/widget/common/common_widgets.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'widget/main/main_widgets.dart';
+import '../widget/main/main_widgets.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +26,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Eat It App',
       theme: ThemeData(
@@ -37,6 +40,7 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   final FirebaseApp app;
   final mainView = MainViewModelImp();
+  final mainStateController = Get.put(MainStateController());
 
   MyHomePage({required this.app});
 
@@ -73,7 +77,10 @@ class MyHomePage extends StatelessWidget {
                 itemCount: lst.length,
                 itemBuilder: animationItemBuilder(
                   (index) => InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      mainStateController.selectedRestaurant.value = lst[index];
+                      Get.to(() => RestaurantHome());
+                    },
                     child: Container(
                       width: double.infinity,
                       height: MediaQuery.of(context).size.height / 2.5 * 1,

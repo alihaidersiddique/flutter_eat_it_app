@@ -1,5 +1,10 @@
 class RestaurantModel {
-  String address = '', name = '', imageUrl = '', paymentUrl = '', phone = '';
+  String restaurantId = '',
+      address = '',
+      name = '',
+      imageUrl = '',
+      paymentUrl = '',
+      phone = '';
 
   RestaurantModel({
     required this.address,
