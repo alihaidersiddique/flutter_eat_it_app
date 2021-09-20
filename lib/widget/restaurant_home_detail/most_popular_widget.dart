@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_eat_it_app/model/popular_item_model.dart';
 import 'package:flutter_eat_it_app/state/main_state.dart';
 import 'package:flutter_eat_it_app/strings/restaurant_home_strings.dart';
-import 'package:flutter_eat_it_app/view_model/restaurant_home_vm/restaurant_home_vm.dart';
+import 'package:flutter_eat_it_app/view_model/restaurant_home_detail_vm/restaurant_home_detail_vm.dart';
 import 'package:flutter_eat_it_app/widget/common/common_widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,7 +14,7 @@ class MostPopularWidget extends StatelessWidget {
     required this.mainStateController,
   }) : super(key: key);
 
-  final RestaurantHomeViewModel viewModel;
+  final RestaurantHomeDetailViewModel viewModel;
   final MainStateController mainStateController;
 
   @override
