@@ -4,16 +4,21 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eat_it_app/const/const.dart';
 import 'package:flutter_eat_it_app/model/category_model.dart';
+import 'package:flutter_eat_it_app/screens/food_list.dart';
+import 'package:flutter_eat_it_app/state/category_state.dart';
 import 'package:flutter_eat_it_app/widget/common/common_widgets.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CategoryListWidget extends StatelessWidget {
   const CategoryListWidget({
     Key? key,
     required this.lst,
+    required this.categoryStateController,
   }) : super(key: key);
 
   final List<CategoryModel> lst;
+  final CategoryStateController categoryStateController;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +34,10 @@ class CategoryListWidget extends StatelessWidget {
               crossAxisCount: 2, crossAxisSpacing: 1, mainAxisSpacing: 1),
           itemCount: lst.length,
           itemBuilder: animationItemBuilder((index) => InkWell(
-                onTap: () {},
+                onTap: () {
+                  categoryStateController.selectedCategory.value = lst[index];
+                  Get.to(() => FoodListScreen());
+                },
                 child: Card(
                   semanticContainer: true,
                   clipBehavior: Clip.antiAliasWithSaveLayer,

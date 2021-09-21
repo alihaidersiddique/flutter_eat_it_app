@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_eat_it_app/model/category_model.dart';
+import 'package:flutter_eat_it_app/state/category_state.dart';
 import 'package:flutter_eat_it_app/state/main_state.dart';
 import 'package:flutter_eat_it_app/strings/restaurant_home_strings.dart';
 import 'package:flutter_eat_it_app/view_model/category_vm/category_view_model_imp.dart';
@@ -10,6 +11,8 @@ import 'package:google_fonts/google_fonts.dart';
 class CategoryScreen extends StatelessWidget {
   final mainView = CategoryViewModelImp();
   final MainStateController mainStateController = Get.find();
+  final CategoryStateController categoryStateController =
+      Get.put(CategoryStateController());
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +39,10 @@ class CategoryScreen extends StatelessWidget {
             var lst = snapshot.data as List<CategoryModel>;
             return Container(
                 margin: const EdgeInsets.only(top: 10),
-                child: CategoryListWidget(lst: lst));
+                child: CategoryListWidget(
+                  lst: lst,
+                  categoryStateController: categoryStateController,
+                ));
           }
         },
       ),
