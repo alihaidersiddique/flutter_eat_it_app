@@ -2,15 +2,18 @@ import 'package:auto_animated/auto_animated.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eat_it_app/const/const.dart';
+import 'package:flutter_eat_it_app/screens/food_detail.dart';
 import 'package:flutter_eat_it_app/state/category_state.dart';
+import 'package:flutter_eat_it_app/state/food_list_state.dart';
 import 'package:flutter_eat_it_app/strings/food_list_strings.dart';
 import 'package:flutter_eat_it_app/widget/common/common_widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FoodListScreen extends StatelessWidget {
-  //final mainView = CategoryViewModelImp();
   final CategoryStateController categoryStateController = Get.find();
+  final FoodListStateController foodListStateController =
+      Get.put(FoodListStateController());
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +39,13 @@ class FoodListScreen extends StatelessWidget {
               itemCount:
                   categoryStateController.selectedCategory.value.foods.length,
               itemBuilder: animationItemBuilder((index) => InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    foodListStateController.selectedFood.value =
+                        categoryStateController
+                            .selectedCategory.value.foods[index];
+
+                    Get.to(() => FoodDetailScreen());
+                  },
                   child: SizedBox(
                     height: MediaQuery.of(context).size.height / 6 * 2,
                     child: Card(
@@ -45,6 +54,7 @@ class FoodListScreen extends StatelessWidget {
                       child: Stack(
                         fit: StackFit.expand,
                         children: [
+                          // food image
                           CachedNetworkImage(
                             imageUrl: categoryStateController
                                 .selectedCategory.value.foods[index].image,
@@ -57,6 +67,7 @@ class FoodListScreen extends StatelessWidget {
                               child: CircularProgressIndicator(),
                             ),
                           ),
+                          // grey text box
                           Align(
                             alignment: Alignment.bottomCenter,
                             child: Container(
@@ -66,7 +77,9 @@ class FoodListScreen extends StatelessWidget {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 10, bottom: 5),
+                                      top: 10,
+                                      bottom: 5,
+                                    ),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -76,37 +89,44 @@ class FoodListScreen extends StatelessWidget {
                                         Column(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
+                                            // name text
                                             Text(
                                               '${categoryStateController.selectedCategory.value.foods[index].name}',
                                               textAlign: TextAlign.center,
                                               style: GoogleFonts.jetBrainsMono(
-                                                  color: Colors.white,
-                                                  fontSize: 18),
+                                                color: Colors.white,
+                                                fontSize: 18,
+                                              ),
                                             ),
+                                            // price text
                                             Text(
                                               '$priceText\$${categoryStateController.selectedCategory.value.foods[index].price}',
                                               textAlign: TextAlign.center,
                                               style: GoogleFonts.jetBrainsMono(
-                                                  color: Colors.white,
-                                                  fontSize: 18),
+                                                color: Colors.white,
+                                                fontSize: 18,
+                                              ),
                                             ),
+                                            // icons row
                                             Row(
                                               children: [
                                                 IconButton(
                                                   onPressed: () {},
                                                   icon: Icon(
-                                                      Icons.favorite_border,
-                                                      color: Colors.white),
+                                                    Icons.favorite_border,
+                                                    color: Colors.white,
+                                                  ),
                                                 ),
                                                 SizedBox(width: 50),
                                                 IconButton(
                                                   onPressed: () {},
                                                   icon: Icon(
-                                                      Icons.add_shopping_cart,
-                                                      color: Colors.white),
+                                                    Icons.add_shopping_cart,
+                                                    color: Colors.white,
+                                                  ),
                                                 ),
                                               ],
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ],
