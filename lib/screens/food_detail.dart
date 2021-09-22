@@ -5,6 +5,7 @@ import 'package:flutter_eat_it_app/utils/utils.dart';
 import 'package:flutter_eat_it_app/widget/food_detail/food_detail_description_widget.dart';
 import 'package:flutter_eat_it_app/widget/food_detail/food_detail_image_widget.dart';
 import 'package:flutter_eat_it_app/widget/food_detail/food_detail_name_widget.dart';
+import 'package:flutter_eat_it_app/widget/food_detail/food_detail_size_widget.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -47,7 +48,10 @@ class FoodDetailScreen extends StatelessWidget {
                     foodDetailStateController: foodDetailStateController,
                     foodListStateController: foodListStateController),
                 FoodDetailDescriptionWidget(
-                    foodListStateController: foodListStateController)
+                    foodListStateController: foodListStateController),
+                FoodDetailSizeWidget(
+                    foodListStateController: foodListStateController,
+                    foodDetailStateController: foodDetailStateController)
               ],
             ),
           ),
