@@ -32,7 +32,9 @@ dependencies:
   auto_animated: any
   carousel_slider: any
   flutter_zoom_drawer: any
-
+  flutter_elegant_number_button: any
+  flutter_rating_bar: any
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

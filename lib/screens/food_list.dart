@@ -43,7 +43,6 @@ class FoodListScreen extends StatelessWidget {
                     foodListStateController.selectedFood.value =
                         categoryStateController
                             .selectedCategory.value.foods[index];
-
                     Get.to(() => FoodDetailScreen());
                   },
                   child: SizedBox(
