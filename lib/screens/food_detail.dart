@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eat_it_app/state/cart_state.dart';
+import 'package:flutter_eat_it_app/state/category_state.dart';
 import 'package:flutter_eat_it_app/state/food_detail_state.dart';
 import 'package:flutter_eat_it_app/state/food_list_state.dart';
 import 'package:flutter_eat_it_app/strings/food_detail_strings.dart';
@@ -11,9 +13,11 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FoodDetailScreen extends StatelessWidget {
+  final CategoryStateController categoryStateController = Get.find();
   final FoodListStateController foodListStateController = Get.find();
   final FoodDetailStateController foodDetailStateController =
       Get.put(FoodDetailStateController());
+  final CartStateController cartStateController = Get.find();
 
   @override
   Widget build(BuildContext context) {

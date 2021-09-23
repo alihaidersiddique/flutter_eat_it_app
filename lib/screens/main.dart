@@ -1,21 +1,26 @@
+import 'dart:convert';
+
 import 'package:auto_animated/auto_animated.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_eat_it_app/model/cart_model.dart';
 import 'package:flutter_eat_it_app/model/restaurant_model.dart';
 import 'package:flutter_eat_it_app/screens/restaurant_home.dart';
+import 'package:flutter_eat_it_app/state/cart_state.dart';
 import 'package:flutter_eat_it_app/state/main_state.dart';
 import 'package:flutter_eat_it_app/strings/main_strings.dart';
+import 'package:flutter_eat_it_app/utils/const.dart';
 import 'package:flutter_eat_it_app/view_model/main_vm/main_view_model_imp.dart';
 import 'package:flutter_eat_it_app/widget/common/common_widgets.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widget/main/main_widgets.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   FirebaseApp app = await Firebase.initializeApp();
-
+  await GetStorage.init();
   runApp(MyApp(app: app));
 }
 
@@ -37,12 +42,41 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   final FirebaseApp app;
   final mainView = MainViewModelImp();
   final mainStateController = Get.put(MainStateController());
+  final cartStateController = Get.put(CartStateController());
+  final box = GetStorage();
 
   MyHomePage({required this.app});
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      if (widget.box.hasData(MY_CART_KEY)) {
+        var cartSave = await widget.box.read(MY_CART_KEY) as String;
+        if (cartSave.length > 0 && cartSave.isNotEmpty) {
+          final listCart = jsonDecode(cartSave) as List<dynamic>;
+          final listCartParsed =
+              listCart.map((e) => CartModel.fromJson(e)).toList();
+          if (listCartParsed.length > 0) {
+            widget.cartStateController.cart.value = listCartParsed;
+          }
+        }
+      } else {
+        widget.cartStateController.cart.value =
+            List<CartModel>.empty(growable: true);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +93,7 @@ class MyHomePage extends StatelessWidget {
         elevation: 10,
       ),
       body: FutureBuilder(
-        future: mainView.displayRestaurantList(),
+        future: widget.mainView.displayRestaurantList(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting)
             return Center(
@@ -78,7 +112,8 @@ class MyHomePage extends StatelessWidget {
                 itemBuilder: animationItemBuilder(
                   (index) => InkWell(
                     onTap: () {
-                      mainStateController.selectedRestaurant.value = lst[index];
+                      widget.mainStateController.selectedRestaurant.value =
+                          lst[index];
                       Get.to(() => RestaurantHome());
                     },
                     child: Container(

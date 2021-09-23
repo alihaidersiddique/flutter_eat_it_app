@@ -53,7 +53,7 @@ class CartStateController extends GetxController {
             .reduce((value, element) => value + element);
   }
 
-  getQuantity() {
+  int getQuantity() {
     return cart.length == 0
         ? 0
         : cart
