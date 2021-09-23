@@ -5,8 +5,8 @@ import 'package:flutter_eat_it_app/state/main_state.dart';
 import 'package:flutter_eat_it_app/strings/restaurant_home_strings.dart';
 import 'package:flutter_eat_it_app/view_model/category_vm/category_view_model_imp.dart';
 import 'package:flutter_eat_it_app/widget/category/category_list_widget.dart';
+import 'package:flutter_eat_it_app/widget/common/appbar_with_cart_widget.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CategoryScreen extends StatelessWidget {
   final mainView = CategoryViewModelImp();
@@ -17,16 +17,7 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          categoryText,
-          style: GoogleFonts.jetBrainsMono(color: Colors.black),
-        ),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        iconTheme: IconThemeData(color: Colors.black),
-        elevation: 10,
-      ),
+      appBar: AppBarWithCartButton(title: categoryText),
       body: FutureBuilder(
         future: mainView.displayCategoryByRestaurantId(
             mainStateController.selectedRestaurant.value.restaurantId),
