@@ -35,6 +35,7 @@ dependencies:
   flutter_elegant_number_button: any
   flutter_rating_bar: any
   badges: any
+  get_storage: any
   
 dev_dependencies:
   flutter_test:
