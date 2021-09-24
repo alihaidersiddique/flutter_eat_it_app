@@ -27,25 +27,25 @@ class FoodModel {
     if (json['addon'] != null) {
       addon = List<AddonModel>.empty(growable: true);
       json['addon'].forEach((v) {
-        addon.add(AddonModel(name: name, price: price));
+        addon.add(AddonModel.fromJson(v));
       });
     }
 
     if (json['size'] != null) {
       size = List<SizeModel>.empty(growable: true);
       json['size'].forEach((v) {
-        size.add(SizeModel(name: name, price: price));
+        size.add(SizeModel.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();
+    data['id'] = this.id;
     data['name'] = this.name;
     data['price'] = this.price;
-    data['id'] = this.id;
-    data['description'] = this.description;
     data['image'] = this.image;
+    data['description'] = this.description;
     data['size'] = this.size.map((v) => v.toJson()).toList();
     data['addon'] = this.addon.map((v) => v.toJson()).toList();
     return data;

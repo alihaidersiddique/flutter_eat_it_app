@@ -6,8 +6,8 @@ class CartModel extends FoodModel {
   CartModel({
     id,
     name,
-    price,
     image,
+    price,
     size,
     addon,
     description,
@@ -15,8 +15,8 @@ class CartModel extends FoodModel {
   }) : super(
           id: id,
           name: name,
-          price: price,
           image: image,
+          price: price,
           size: size,
           addon: addon,
           description: description,

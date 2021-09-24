@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_eat_it_app/state/cart_state.dart';
 import 'package:flutter_eat_it_app/strings/cart_strings.dart';
+import 'package:flutter_eat_it_app/widget/cart/cart_image_widget.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -23,7 +25,46 @@ class CartDetailScreen extends StatelessWidget {
         ],
       ),
       body: cartStateController.getQuantity() > 0
-          ? Container()
+          ? Obx(() => Column(children: [
+                Expanded(
+                    child: ListView.builder(
+                  itemCount: cartStateController.cart.length,
+                  itemBuilder: (context, index) => Slidable(
+                    child: Card(
+                      elevation: 8.0,
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 6),
+                      child: Container(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: CartImageWidget(
+                                cartStateController: cartStateController,
+                                cartModel: cartStateController.cart[index],
+                              ),
+                            ),
+                            Expanded(child: Container(), flex: 6)
+                          ],
+                        ),
+                      ),
+                    ),
+                    actionPane: SlidableDrawerActionPane(),
+                    actionExtentRatio: 0.25,
+                    secondaryActions: [
+                      IconSlideAction(
+                        caption: deleteText,
+                        icon: Icons.delete,
+                        color: Colors.red,
+                        onTap: () {},
+                      )
+                    ],
+                  ),
+                ))
+              ]))
           : Center(
               child: Text(cartEmptyText),
             ),

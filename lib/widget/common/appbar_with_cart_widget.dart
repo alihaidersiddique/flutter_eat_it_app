@@ -37,7 +37,7 @@ class AppBarWithCartButton extends StatelessWidget
             ),
             child: IconButton(
               onPressed: () {
-                Get.to(CartDetailScreen());
+                Get.to(() => CartDetailScreen());
               },
               icon: Icon(Icons.shopping_bag),
             ),

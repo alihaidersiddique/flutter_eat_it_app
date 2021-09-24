@@ -36,6 +36,8 @@ dependencies:
   flutter_rating_bar: any
   badges: any
   get_storage: any
+  intl: any
+  flutter_slidable: any
   
 dev_dependencies:
   flutter_test:

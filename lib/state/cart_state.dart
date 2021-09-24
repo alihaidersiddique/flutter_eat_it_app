@@ -11,7 +11,7 @@ class CartStateController extends GetxController {
   var cart = List<CartModel>.empty(growable: true).obs;
   final box = GetStorage();
 
-  addToCart(FoodModel foodModel, {int quantity = 0}) async {
+  addToCart(FoodModel foodModel, {int quantity = 1}) async {
     try {
       var cartItem = CartModel(
         id: foodModel.id,
