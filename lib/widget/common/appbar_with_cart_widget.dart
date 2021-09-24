@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_eat_it_app/screens/cart_screen.dart';
 import 'package:flutter_eat_it_app/state/cart_state.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,7 +36,9 @@ class AppBarWithCartButton extends StatelessWidget
               style: GoogleFonts.jetBrainsMono(color: Colors.white),
             ),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.to(CartDetailScreen());
+              },
               icon: Icon(Icons.shopping_bag),
             ),
           ),
