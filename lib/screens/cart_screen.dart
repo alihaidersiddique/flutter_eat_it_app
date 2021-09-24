@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_eat_it_app/state/cart_state.dart';
 import 'package:flutter_eat_it_app/strings/cart_strings.dart';
 import 'package:flutter_eat_it_app/widget/cart/cart_image_widget.dart';
+import 'package:flutter_eat_it_app/widget/cart/cart_info_widget.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -47,7 +48,12 @@ class CartDetailScreen extends StatelessWidget {
                                 cartModel: cartStateController.cart[index],
                               ),
                             ),
-                            Expanded(child: Container(), flex: 6)
+                            Expanded(
+                              flex: 6,
+                              child: CartInfoWidget(
+                                cartModel: cartStateController.cart[index],
+                              ),
+                            )
                           ],
                         ),
                       ),
