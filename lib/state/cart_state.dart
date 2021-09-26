@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter_eat_it_app/model/cart_model.dart';
 import 'package:flutter_eat_it_app/model/food_model.dart';
 import 'package:flutter_eat_it_app/strings/cart_strings.dart';
@@ -62,4 +61,6 @@ class CartStateController extends GetxController {
   }
 
   getShippingFee() => sumCart() * 0.1; // 10% of total purchase
+
+  getSubTotal() => sumCart() + getShippingFee();
 }

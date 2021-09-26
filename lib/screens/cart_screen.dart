@@ -4,6 +4,7 @@ import 'package:flutter_eat_it_app/strings/cart_strings.dart';
 import 'package:flutter_eat_it_app/view_model/cart_vm/cart_view_model_imp.dart';
 import 'package:flutter_eat_it_app/widget/cart/cart_image_widget.dart';
 import 'package:flutter_eat_it_app/widget/cart/cart_info_widget.dart';
+import 'package:flutter_eat_it_app/widget/cart/cart_total_widget.dart';
 import 'package:flutter_elegant_number_button/flutter_elegant_number_button.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
@@ -63,7 +64,7 @@ class CartDetailScreen extends StatelessWidget {
                                   cartStateController.cart[index].quantity,
                               minValue: 1,
                               maxValue: 100,
-                              color: Colors.blueGrey.shade100,
+                              color: Colors.orangeAccent,
                               onChanged: (value) {
                                 // update quantity
                                 cartViewModel.updateCart(
@@ -86,7 +87,8 @@ class CartDetailScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                ))
+                )),
+                CartTotalWidget(controller: cartStateController)
               ]))
           : Center(
               child: Text(cartEmptyText),
