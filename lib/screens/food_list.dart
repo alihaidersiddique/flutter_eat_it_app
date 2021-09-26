@@ -6,6 +6,7 @@ import 'package:flutter_eat_it_app/screens/food_detail.dart';
 import 'package:flutter_eat_it_app/state/cart_state.dart';
 import 'package:flutter_eat_it_app/state/category_state.dart';
 import 'package:flutter_eat_it_app/state/food_list_state.dart';
+import 'package:flutter_eat_it_app/state/main_state.dart';
 import 'package:flutter_eat_it_app/strings/food_list_strings.dart';
 import 'package:flutter_eat_it_app/widget/common/appbar_with_cart_widget.dart';
 import 'package:flutter_eat_it_app/widget/common/common_widgets.dart';
@@ -14,6 +15,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class FoodListScreen extends StatelessWidget {
   final CategoryStateController categoryStateController = Get.find();
+  final MainStateController mainStateController = Get.find();
   final FoodListStateController foodListStateController =
       Get.put(FoodListStateController());
   final CartStateController cartStateController = Get.find();
@@ -123,7 +125,11 @@ class FoodListScreen extends StatelessWidget {
                                                             categoryStateController
                                                                 .selectedCategory
                                                                 .value
-                                                                .foods[index]),
+                                                                .foods[index],
+                                                            mainStateController
+                                                                .selectedRestaurant
+                                                                .value
+                                                                .restaurantId),
                                                     icon: Icon(
                                                       Icons.add_shopping_cart,
                                                       color: Colors.white,

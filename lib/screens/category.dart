@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_eat_it_app/model/category_model.dart';
 import 'package:flutter_eat_it_app/state/category_state.dart';
 import 'package:flutter_eat_it_app/state/main_state.dart';
-import 'package:flutter_eat_it_app/strings/restaurant_home_strings.dart';
 import 'package:flutter_eat_it_app/view_model/category_vm/category_view_model_imp.dart';
 import 'package:flutter_eat_it_app/widget/category/category_list_widget.dart';
 import 'package:flutter_eat_it_app/widget/common/appbar_with_cart_widget.dart';

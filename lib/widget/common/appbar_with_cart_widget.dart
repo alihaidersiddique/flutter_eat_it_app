@@ -2,6 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eat_it_app/screens/cart_screen.dart';
 import 'package:flutter_eat_it_app/state/cart_state.dart';
+import 'package:flutter_eat_it_app/state/main_state.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -9,6 +10,7 @@ class AppBarWithCartButton extends StatelessWidget
     implements PreferredSizeWidget {
   final String title;
   final CartStateController cartStateController = Get.find();
+  final MainStateController mainStateController = Get.find();
 
   AppBarWithCartButton({required this.title});
 
@@ -32,7 +34,7 @@ class AppBarWithCartButton extends StatelessWidget
             showBadge: true,
             badgeColor: Colors.red,
             badgeContent: Text(
-              '${cartStateController.getQuantity()}',
+              '${cartStateController.getQuantity(mainStateController.selectedRestaurant.value.restaurantId)}',
               style: GoogleFonts.jetBrainsMono(color: Colors.white),
             ),
             child: IconButton(

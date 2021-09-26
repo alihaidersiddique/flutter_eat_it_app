@@ -2,6 +2,7 @@ import 'package:flutter_eat_it_app/model/food_model.dart';
 
 class CartModel extends FoodModel {
   int quantity = 0;
+  String restaurantId = '';
 
   CartModel({
     id,
@@ -12,6 +13,7 @@ class CartModel extends FoodModel {
     addon,
     description,
     required this.quantity,
+    required this.restaurantId,
   }) : super(
           id: id,
           name: name,
@@ -25,6 +27,8 @@ class CartModel extends FoodModel {
   factory CartModel.fromJson(Map<String, dynamic> json) {
     final food = FoodModel.fromJson(json);
     final quantity = json['quantity'];
+    final restaurantId = json['restaurantId'];
+
     return CartModel(
       id: food.id,
       name: food.name,
@@ -34,6 +38,7 @@ class CartModel extends FoodModel {
       addon: food.addon,
       description: food.description,
       quantity: quantity,
+      restaurantId: restaurantId,
     );
   }
 
@@ -47,6 +52,8 @@ class CartModel extends FoodModel {
     data['addon'] = this.addon.map((v) => v.toJson()).toList();
     data['description'] = this.description;
     data['quantity'] = this.quantity;
+    data['restaurantId'] = this.restaurantId;
+
     return data;
   }
 }
