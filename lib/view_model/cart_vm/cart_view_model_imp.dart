@@ -6,5 +6,17 @@ class CartViewModelImp implements CartViewModel {
   void updateCart(CartStateController controller, int index, int value) {
     controller.cart[index].quantity = value;
     controller.cart.refresh();
+    controller.saveDatabase();
+  }
+
+  @override
+  void deleteCart(CartStateController controller, int index) {
+    controller.cart.removeAt(index);
+    controller.saveDatabase();
+  }
+
+  @override
+  void clearCart(CartStateController controller) {
+    controller.clearCart();
   }
 }
