@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_eat_it_app/state/cart_state.dart';
 import 'package:flutter_eat_it_app/strings/cart_strings.dart';
+import 'package:flutter_eat_it_app/view_model/cart_vm/cart_view_model_imp.dart';
 import 'package:flutter_eat_it_app/widget/cart/cart_image_widget.dart';
 import 'package:flutter_eat_it_app/widget/cart/cart_info_widget.dart';
+import 'package:flutter_elegant_number_button/flutter_elegant_number_button.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -10,6 +12,7 @@ import 'package:get_storage/get_storage.dart';
 class CartDetailScreen extends StatelessWidget {
   final CartStateController cartStateController = Get.find();
   final box = GetStorage();
+  final CartViewModelImp cartViewModel = CartViewModelImp();
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +56,21 @@ class CartDetailScreen extends StatelessWidget {
                               child: CartInfoWidget(
                                 cartModel: cartStateController.cart[index],
                               ),
-                            )
+                            ),
+                            Center(
+                                child: ElegantNumberButton(
+                              initialValue:
+                                  cartStateController.cart[index].quantity,
+                              minValue: 1,
+                              maxValue: 100,
+                              color: Colors.blueGrey.shade100,
+                              onChanged: (value) {
+                                // update quantity
+                                cartViewModel.updateCart(
+                                    cartStateController, index, value.toInt());
+                              },
+                              decimalPlaces: 0,
+                            ))
                           ],
                         ),
                       ),
