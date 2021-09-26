@@ -17,7 +17,8 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWithCartButton(title: categoryText),
+      appBar: AppBarWithCartButton(
+          title: '${mainStateController.selectedRestaurant.value.name}'),
       body: FutureBuilder(
         future: mainView.displayCategoryByRestaurantId(
             mainStateController.selectedRestaurant.value.restaurantId),
